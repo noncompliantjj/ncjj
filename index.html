@@ -6,7 +6,7 @@
     <title>NONCOMPLIANT | JIU JITSU</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Times New Roman Global Override - removing Gothic font entirely */
+        /* Times New Roman Global Override */
         body, button, select, p, h1, h2, h3, h4, span, div { 
             font-family: 'Times New Roman', Times, serif !important; 
         }
@@ -91,7 +91,7 @@
     </div>
 
     <nav class="p-6 flex justify-between items-center border-b border-zinc-900 sticky top-0 bg-zinc-950/80 backdrop-blur-md z-50">
-        <img src="NonCompliant white.png" alt="NonCompliant Logo" class="h-6 object-contain">
+        <img src="NonCompliant white.jpg" alt="NonCompliant Logo" class="h-6 object-contain">
         <div class="flex items-center gap-6">
             <div class="text-[10px] font-bold tracking-[0.3em] uppercase text-zinc-500 hidden md:block">NYST</div>
             <button onclick="toggleCart()" class="bg-white text-black px-4 py-2 text-xs font-bold italic flex gap-2 hover:bg-zinc-200 transition-colors">
@@ -101,166 +101,8 @@
     </nav>
 
     <header class="py-24 px-6 flex flex-col items-center border-b border-zinc-900 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-zinc-900 via-zinc-950 to-zinc-950">
-        <img src="NonCompliant white.png" alt="NonCompliant Banner Logo" class="w-full max-w-2xl mb-12 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+        <img src="NonCompliant white.jpg" alt="NonCompliant Banner Logo" class="w-full max-w-2xl mb-12 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
         <p class="uppercase tracking-[0.5em] text-[10px] text-zinc-500 font-bold text-center italic">Encourage Compliance</p>
     </header>
 
-    <main class="max-w-7xl mx-auto px-6 py-20">
-        
-        <div class="mb-12 border-b border-zinc-900 pb-4 flex justify-between items-end">
-            <h2 class="text-[11px] uppercase tracking-[0.5em] text-zinc-500 font-bold">Kit</h2>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-            
-            <div class="flex flex-col border border-zinc-800 bg-zinc-900/10 hover:border-zinc-600 transition-colors">
-                <div class="aspect-square bg-[#f4f4f4] flex items-center justify-center p-8 cursor-zoom-in group overflow-hidden" onclick="openModal('b79f5f4c-cd2f-42f9-b1f1-777cf63a45c0.png')">
-                    <img src="b79f5f4c-cd2f-42f9-b1f1-777cf63a45c0.png" class="max-h-full object-contain group-hover:scale-110 transition-transform duration-700">
-                </div>
-                <div class="p-8 flex flex-col gap-5 border-t border-zinc-800">
-                    <div class="flex justify-between items-baseline">
-                        <h3 class="text-4xl italic">Essential Hoodie</h3>
-                        <span class="text-xl font-bold italic">$25.00</span>
-                    </div>
-                    <div class="grid grid-cols-2 gap-3">
-                        <select id="size1" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3 focus:border-zinc-400">
-                            <option>Men's S</option><option>Men's M</option><option>Men's L</option><option>Men's XL</option>
-                        </select>
-                        <select id="color1" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3 focus:border-zinc-400">
-                            <option>Grey</option><option>Black</option><option>Navy</option>
-                        </select>
-                    </div>
-                    <button onclick="addToCart('Essential Hoodie', 25, 'size1', 'color1', this)" class="w-full bg-white text-black py-4 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-zinc-200 transition-all active:scale-95">
-                        Add to Registry
-                    </button>
-                </div>
-            </div>
-
-            <div class="flex flex-col border border-zinc-800 bg-zinc-900/10 hover:border-zinc-600 transition-colors">
-                <div class="aspect-square bg-[#f4f4f4] flex items-center justify-center p-8 cursor-zoom-in group overflow-hidden" onclick="openModal('TShirt NYST front.png')">
-                    <img src="TShirt NYST front.png" class="max-h-full object-contain group-hover:scale-110 transition-transform duration-700">
-                </div>
-                <div class="p-8 flex flex-col gap-5 border-t border-zinc-800">
-                    <div class="flex justify-between items-baseline">
-                        <h3 class="text-4xl italic">NYST 1.0 Tee</h3>
-                        <span class="text-xl font-bold italic">$15.00</span>
-                    </div>
-                    <div class="grid grid-cols-2 gap-3">
-                        <select id="size2" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3 focus:border-zinc-400">
-                            <option>Men's S</option><option>Men's M</option><option>Men's L</option><option>Men's XL</option>
-                        </select>
-                        <select id="color2" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3 focus:border-zinc-400">
-                            <option>Grey</option><option>Black</option><option>Navy</option>
-                        </select>
-                    </div>
-                    <button onclick="addToCart('NYST 1.0 Tee', 15, 'size2', 'color2', this)" class="w-full bg-white text-black py-4 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-zinc-200 transition-all active:scale-95">
-                        Add to Registry
-                    </button>
-                </div>
-            </div>
-
-            <div class="flex flex-col border border-zinc-800 bg-zinc-900/10 hover:border-zinc-600 transition-colors">
-                <div class="aspect-square bg-[#f4f4f4] flex items-center justify-center p-8 cursor-zoom-in group overflow-hidden" onclick="openModal('TShirt NYST.png')">
-                    <img src="TShirt NYST.png" class="max-h-full object-contain group-hover:scale-110 transition-transform duration-700">
-                </div>
-                <div class="p-8 flex flex-col gap-5 border-t border-zinc-800">
-                    <div class="flex justify-between items-baseline">
-                        <h3 class="text-4xl italic">NYST 2.0 Tee</h3>
-                        <span class="text-xl font-bold italic">$15.00</span>
-                    </div>
-                    <div class="grid grid-cols-2 gap-3">
-                        <select id="size3" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3 focus:border-zinc-400">
-                            <option>Men's S</option><option>Men's M</option><option>Men's L</option><option>Men's XL</option>
-                        </select>
-                        <select id="color3" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3 focus:border-zinc-400">
-                            <option>Grey</option><option>Black</option><option>Navy</option>
-                        </select>
-                    </div>
-                    <button onclick="addToCart('NYST 2.0 Tee', 15, 'size3', 'color3', this)" class="w-full bg-white text-black py-4 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-zinc-200 transition-all active:scale-95">
-                        Add to Registry
-                    </button>
-                </div>
-            </div>
-
-        </div>
-    </main>
-
-    <footer class="py-20 border-t border-zinc-900 text-center opacity-40">
-        <img src="NonCompliantJiuJitsuNYST no bg.png" alt="NonCompliant Footer Logo" class="h-6 object-contain mx-auto mb-4">
-        <p class="text-[8px] uppercase tracking-[0.5em] mt-2 italic font-bold">© 2026 • New York Standard</p>
-    </footer>
-
-    <script>
-        let cart = [];
-        
-        function addToCart(name, price, sizeId, colorId, btn) {
-            const size = document.getElementById(sizeId).value;
-            const color = document.getElementById(colorId).value;
-            
-            cart.push({ name, price, size, color });
-            updateCartUI();
-
-            // Visual feedback
-            const originalText = btn.innerText;
-            btn.innerText = "ADDED TO CART";
-            btn.classList.replace('bg-white', 'bg-zinc-800');
-            btn.classList.replace('text-black', 'text-white');
-            
-            setTimeout(() => {
-                btn.innerText = originalText;
-                btn.classList.replace('bg-zinc-800', 'bg-white');
-                btn.classList.replace('text-white', 'text-black');
-            }, 1500);
-        }
-
-        function updateCartUI() {
-            document.getElementById('cartCount').innerText = cart.length;
-            const itemsContainer = document.getElementById('cartItems');
-            const subtotalEl = document.getElementById('subtotal');
-            
-            itemsContainer.innerHTML = '';
-            let total = 0;
-
-            cart.forEach((item, index) => {
-                total += item.price;
-                itemsContainer.innerHTML += `
-                    <div class="flex justify-between items-start border-b border-zinc-900 pb-4">
-                        <div>
-                            <p class="text-lg italic" style="font-family: 'Times New Roman', serif;">${item.name}</p>
-                            <p class="text-[10px] uppercase tracking-widest text-zinc-500">${item.size} / ${item.color}</p>
-                        </div>
-                        <p class="font-bold">$${item.price}.00</p>
-                    </div>
-                `;
-            });
-
-            if (cart.length === 0) {
-                itemsContainer.innerHTML = '<p class="text-zinc-600 italic">Your cart is empty.</p>';
-            }
-
-            subtotalEl.innerText = `$${total}.00`;
-        }
-
-        function toggleCart() {
-            const drawer = document.getElementById('cartDrawer');
-            const overlay = document.getElementById('cartOverlay');
-            drawer.classList.toggle('active');
-            overlay.classList.toggle('active');
-        }
-
-        function openModal(imgSrc) {
-            const modal = document.getElementById('imageModal');
-            const modalImg = document.getElementById('modalImg');
-            modalImg.src = imgSrc;
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('imageModal');
-            modal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-    </script>
-</body>
-</html>
+    <main class="max-w-7xl mx-auto px-6 py-2
