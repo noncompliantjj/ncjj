@@ -6,7 +6,7 @@
     <title>NONCOMPLIANT | JIU JITSU</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body, button, select, p, h1, h2, h3, h4, span, div { 
+        body, button, select, p, h1, h2, h3, h4, span, div, input, label { 
             font-family: 'Times New Roman', Times, serif !important; 
         }
         
@@ -20,7 +20,7 @@
             background-size: 1em;
         }
 
-        #imageModal {
+        #imageModal, #checkoutModal {
             display: none;
             position: fixed;
             inset: 0;
@@ -28,10 +28,9 @@
             z-index: 3000;
             align-items: center;
             justify-content: center;
-            cursor: zoom-out;
             backdrop-filter: blur(10px);
         }
-        #imageModal.active { display: flex; }
+        #imageModal.active, #checkoutModal.active { display: flex; }
 
         #cartDrawer {
             position: fixed;
@@ -62,7 +61,35 @@
 <body class="selection:bg-white selection:text-black">
 
     <div id="imageModal" onclick="closeModal()">
-        <img id="modalImg" src="" class="max-w-[90%] max-h-[90%] object-contain shadow-2xl">
+        <img id="modalImg" src="" class="max-w-[90%] max-h-[90%] object-contain shadow-2xl cursor-zoom-out">
+    </div>
+
+    <div id="checkoutModal" class="p-6">
+        <div class="w-full max-w-md bg-zinc-950 border border-zinc-800 p-8 shadow-2xl" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-center mb-8 border-b border-zinc-900 pb-4">
+                <h2 class="text-2xl italic text-white">Finalize Registration</h2>
+                <button onclick="closeCheckout()" class="text-[10px] uppercase tracking-widest opacity-50 hover:opacity-100 text-white">Cancel</button>
+            </div>
+            <form class="space-y-6" onsubmit="event.preventDefault(); alert('Order Submitted - Keep Training.');">
+                <div>
+                    <label class="block text-[10px] uppercase tracking-[0.2em] text-zinc-500 mb-2 font-bold">Full Name</label>
+                    <input type="text" required class="w-full bg-zinc-900 border border-zinc-800 p-3 text-white focus:border-white outline-none transition-colors">
+                </div>
+                <div>
+                    <label class="block text-[10px] uppercase tracking-[0.2em] text-zinc-500 mb-2 font-bold">Phone Number</label>
+                    <input type="tel" required class="w-full bg-zinc-900 border border-zinc-800 p-3 text-white focus:border-white outline-none transition-colors">
+                </div>
+                <div>
+                    <label class="block text-[10px] uppercase tracking-[0.2em] text-zinc-500 mb-2 font-bold">Email Address</label>
+                    <input type="email" required class="w-full bg-zinc-900 border border-zinc-800 p-3 text-white focus:border-white outline-none transition-colors">
+                </div>
+                <div class="flex items-start gap-3 py-4">
+                    <input type="checkbox" id="promise" required class="mt-1 accent-white w-4 h-4">
+                    <label for="promise" class="text-sm italic text-zinc-400 select-none">I promise to train jiu jitsu.</label>
+                </div>
+                <button type="submit" class="w-full bg-white text-black py-4 font-bold uppercase tracking-widest hover:bg-zinc-200 transition-all">Submit Order</button>
+            </form>
+        </div>
     </div>
 
     <div id="cartOverlay" class="drawer-overlay" onclick="toggleCart()"></div>
@@ -80,7 +107,7 @@
                 <span class="italic">Subtotal</span>
                 <span id="subtotal">$0.00</span>
             </div>
-            <button class="w-full bg-white text-black py-4 font-bold uppercase tracking-widest hover:bg-zinc-200 transition-all">
+            <button onclick="showCheckout()" class="w-full bg-white text-black py-4 font-bold uppercase tracking-widest hover:bg-zinc-200 transition-all">
                 Checkout
             </button>
         </div>
@@ -102,7 +129,6 @@
     </header>
 
     <main class="max-w-7xl mx-auto px-6 py-20">
-        
         <div class="mb-12 border-b border-zinc-900 pb-4 flex justify-between items-end">
             <h2 class="text-[11px] uppercase tracking-[0.5em] text-zinc-500 font-bold">NonCompliant Gear</h2>
         </div>
@@ -110,7 +136,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
             
             <div class="flex flex-col border border-zinc-800 bg-zinc-900/10 hover:border-zinc-600 transition-colors">
-                <div class="aspect-video bg-[#f4f4f4] flex items-center justify-center p-8 cursor-zoom-in group overflow-hidden" onclick="openModal('b79f5f4c-cd2f-42f9-b1f1-777cf63a45c0.png')">
+                <div class="aspect-square bg-[#f4f4f4] flex items-center justify-center p-8 cursor-zoom-in group overflow-hidden" onclick="openModal('b79f5f4c-cd2f-42f9-b1f1-777cf63a45c0.png')">
                     <img src="b79f5f4c-cd2f-42f9-b1f1-777cf63a45c0.png" class="max-h-full object-contain group-hover:scale-105 transition-transform duration-700">
                 </div>
                 <div class="p-8 flex flex-col gap-5 border-t border-zinc-800">
@@ -119,21 +145,21 @@
                         <span class="text-xl font-bold italic">$25.00</span>
                     </div>
                     <div class="grid grid-cols-2 gap-3">
-                        <select id="size1" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3">
+                        <select id="size-code" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3">
                             <option>S</option><option>M</option><option>L</option><option>XL</option>
                         </select>
-                        <select id="color1" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3">
+                        <select id="color-code" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3">
                             <option>Grey</option><option>Black</option><option>Navy</option>
                         </select>
                     </div>
-                    <button onclick="addToCart('The Code Hoodie', 25, 'size1', 'color1', this)" class="w-full bg-white text-black py-4 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-zinc-200 transition-all">
+                    <button onclick="addToCart('The Code Hoodie', 25, 'size-code', 'color-code', this)" class="w-full bg-white text-black py-4 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-zinc-200 transition-all">
                         Add to Registry
                     </button>
                 </div>
             </div>
 
             <div class="flex flex-col border border-zinc-800 bg-zinc-900/10 hover:border-zinc-600 transition-colors">
-                <div class="aspect-video bg-[#f4f4f4] flex items-center justify-center p-8 cursor-zoom-in group overflow-hidden" onclick="openModal('Hoodie NYST.png')">
+                <div class="aspect-square bg-[#f4f4f4] flex items-center justify-center p-8 cursor-zoom-in group overflow-hidden" onclick="openModal('Hoodie NYST.png')">
                     <img src="Hoodie NYST.png" class="max-h-full object-contain group-hover:scale-105 transition-transform duration-700">
                 </div>
                 <div class="p-8 flex flex-col gap-5 border-t border-zinc-800">
@@ -142,67 +168,21 @@
                         <span class="text-xl font-bold italic">$25.00</span>
                     </div>
                     <div class="grid grid-cols-2 gap-3">
-                        <select id="size1" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3">
+                        <select id="size-nyst-h" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3">
                             <option>S</option><option>M</option><option>L</option><option>XL</option>
                         </select>
-                        <select id="color1" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3">
+                        <select id="color-nyst-h" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3">
                             <option>Grey</option><option>Black</option><option>Navy</option>
                         </select>
                     </div>
-                    <button onclick="addToCart('NonCompliant NYST Hoodie', 25, 'size1', 'color1', this)" class="w-full bg-white text-black py-4 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-zinc-200 transition-all">
-                        Add to Registry
-                    </button>
-                </div>
-            </div>
-            
-            <div class="flex flex-col border border-zinc-800 bg-zinc-900/10 hover:border-zinc-600 transition-colors">
-                <div class="aspect-video bg-[#f4f4f4] flex items-center justify-center p-8 cursor-zoom-in group overflow-hidden" onclick="openModal('TShirt NYST front.png')">
-                    <img src="TShirt NYST front.png" class="max-h-full object-contain group-hover:scale-105 transition-transform duration-700">
-                </div>
-                <div class="p-8 flex flex-col gap-5 border-t border-zinc-800">
-                    <div class="flex justify-between items-baseline">
-                        <h3 class="text-xl italic">NonCompliant NYSTee</h3>
-                        <span class="text-xl font-bold italic">$15.00</span>
-                    </div>
-                    <div class="grid grid-cols-2 gap-3">
-                        <select id="size2" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3">
-                            <option>S</option><option>M</option><option>L</option><option>XL</option>
-                        </select>
-                        <select id="color2" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3">
-                            <option>Grey</option><option>Black</option><option>Navy</option>
-                        </select>
-                    </div>
-                    <button onclick="addToCart('NonCompliant NYSTee', 15, 'size2', 'color2', this)" class="w-full bg-white text-black py-4 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-zinc-200 transition-all">
+                    <button onclick="addToCart('NonCompliant NYST Hoodie', 25, 'size-nyst-h', 'color-nyst-h', this)" class="w-full bg-white text-black py-4 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-zinc-200 transition-all">
                         Add to Registry
                     </button>
                 </div>
             </div>
 
             <div class="flex flex-col border border-zinc-800 bg-zinc-900/10 hover:border-zinc-600 transition-colors">
-                <div class="aspect-video bg-[#f4f4f4] flex items-center justify-center p-8 cursor-zoom-in group overflow-hidden" onclick="openModal('TShirt NYST.png')">
-                    <img src="TShirt NYST.png" class="max-h-full object-contain group-hover:scale-105 transition-transform duration-700">
-                </div>
-                <div class="p-8 flex flex-col gap-5 border-t border-zinc-800">
-                    <div class="flex justify-between items-baseline">
-                        <h3 class="text-xl italic">NonCompliant NYSTee 2.0</h3>
-                        <span class="text-xl font-bold italic">$15.00</span>
-                    </div>
-                    <div class="grid grid-cols-2 gap-3">
-                        <select id="size3" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3">
-                            <option>S</option><option>M</option><option>L</option><option>XL</option>
-                        </select>
-                        <select id="color3" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3">
-                            <option>Grey</option><option>Black</option><option>Navy</option>
-                        </select>
-                    </div>
-                    <button onclick="addToCart('NonCompliant NYSTee 2.0', 15, 'size3', 'color3', this)" class="w-full bg-white text-black py-4 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-zinc-200 transition-all">
-                        Add to Registry
-                    </button>
-                </div>
-            </div>
-
-            <div class="flex flex-col border border-zinc-800 bg-zinc-900/10 hover:border-zinc-600 transition-colors">
-                <div class="aspect-video bg-[#f4f4f4] flex items-center justify-center p-8 cursor-zoom-in group overflow-hidden" onclick="openModal('noncompteryx hoodie colored.png')">
+                <div class="aspect-square bg-[#f4f4f4] flex items-center justify-center p-8 cursor-zoom-in group overflow-hidden" onclick="openModal('noncompteryx hoodie colored.png')">
                     <img src="noncompteryx hoodie colored.png" class="max-h-full object-contain group-hover:scale-105 transition-transform duration-700">
                 </div>
                 <div class="p-8 flex flex-col gap-5 border-t border-zinc-800">
@@ -211,102 +191,14 @@
                         <span class="text-xl font-bold italic">$25.00</span>
                     </div>
                     <div class="grid grid-cols-2 gap-3">
-                        <select id="size5" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3">
+                        <select id="size-teryx-h" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3">
                             <option>S</option><option>M</option><option>L</option><option>XL</option>
                         </select>
-                        <select id="color5" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3">
+                        <select id="color-teryx-h" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3">
                             <option>Grey</option><option>Black</option><option>Navy</option>
                         </select>
                     </div>
-                    <button onclick="addToCart('Non'Compteryx Hoodie', 25, 'size5', 'color5', this)" class="w-full bg-white text-black py-4 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-zinc-200 transition-all">
-                        Add to Registry
-                    </button>
-                </div>
-            </div>
-
-            <div class="flex flex-col border border-zinc-800 bg-zinc-900/10 hover:border-zinc-600 transition-colors">
-                <div class="aspect-video bg-[#f4f4f4] flex items-center justify-center p-8 cursor-zoom-in group overflow-hidden" onclick="openModal('noncompteryx tees colored.png')">
-                    <img src="noncompteryx tees colored.png" class="max-h-full object-contain group-hover:scale-105 transition-transform duration-700">
-                </div>
-                <div class="p-8 flex flex-col gap-5 border-t border-zinc-800">
-                    <div class="flex justify-between items-baseline">
-                        <h3 class="text-xl italic">Non'Compteryx Tee</h3>
-                        <span class="text-xl font-bold italic">$15.00</span>
-                    </div>
-                    <div class="grid grid-cols-2 gap-3">
-                        <select id="size8" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3">
-                            <option>S</option><option>M</option><option>L</option><option>XL</option>
-                        </select>
-                        <select id="color8" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3">
-                            <option>Grey</option><option>Black</option><option>Navy</option>
-                        </select>
-                    </div>
-                    <button onclick="addToCart('Non'Compteryx Tee', 15, 'size8', 'color8', this)" class="w-full bg-white text-black py-4 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-zinc-200 transition-all">
-                        Add to Registry
-                    </button>
-                </div>
-            </div>
-            
-            <div class="flex flex-col border border-zinc-800 bg-zinc-900/10 hover:border-zinc-600 transition-colors">
-                <div class="aspect-video bg-[#f4f4f4] flex items-center justify-center p-8 cursor-zoom-in group overflow-hidden" onclick="openModal('noncompface hoodie colored.png')">
-                    <img src="noncompface hoodie colored.png" class="max-h-full object-contain group-hover:scale-105 transition-transform duration-700">
-                </div>
-                <div class="p-8 flex flex-col gap-5 border-t border-zinc-800">
-                    <div class="flex justify-between items-baseline">
-                        <h3 class="text-xl italic">The NonCompliant Face Hoodie</h3>
-                        <span class="text-xl font-bold italic">$25.00</span>
-                    </div>
-                    <div class="grid grid-cols-2 gap-3">
-                        <select id="size6" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3">
-                            <option>S</option><option>M</option><option>L</option><option>XL</option>
-                        </select>
-                        <select id="color6" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3">
-                            <option>Grey</option><option>Black</option><option>Navy</option>
-                        </select>
-                    </div>
-                    <button onclick="addToCart('The NonCompliant Face Hoodie', 25, 'size6', 'color6', this)" class="w-full bg-white text-black py-4 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-zinc-200 transition-all">
-                        Add to Registry
-                    </button>
-                </div>
-            </div>
-
-            <div class="flex flex-col border border-zinc-800 bg-zinc-900/10 hover:border-zinc-600 transition-colors">
-                <div class="aspect-video bg-[#f4f4f4] flex items-center justify-center p-8 cursor-zoom-in group overflow-hidden" onclick="openModal('noncompface tee colored.png')">
-                    <img src="noncompface tee colored.png" class="max-h-full object-contain group-hover:scale-105 transition-transform duration-700">
-                </div>
-                <div class="p-8 flex flex-col gap-5 border-t border-zinc-800">
-                    <div class="flex justify-between items-baseline">
-                        <h3 class="text-xl italic">The NonCompliant Face Tee</h3>
-                        <span class="text-xl font-bold italic">$15.00</span>
-                    </div>
-                    <div class="grid grid-cols-2 gap-3">
-                        <select id="size7" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3">
-                            <option>S</option><option>M</option><option>L</option><option>XL</option>
-                        </select>
-                        <select id="color7" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3">
-                            <option>Grey</option><option>Black</option><option>Navy</option>
-                        </select>
-                    </div>
-                    <button onclick="addToCart('The NonCompliant Face Tee', 15, 'size7', 'color7', this)" class="w-full bg-white text-black py-4 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-zinc-200 transition-all">
-                        Add to Registry
-                    </button>
-                </div>
-            </div>
-
-            <div class="flex flex-col border border-zinc-800 bg-zinc-900/10 hover:border-zinc-600 transition-colors">
-                <div class="aspect-video bg-[#000] flex items-center justify-center p-8 cursor-zoom-in group overflow-hidden" onclick="openModal('NonCompliant white.png')">
-                    <img src="NonCompliant white.png" class="max-h-full object-contain group-hover:scale-105 transition-transform duration-700">
-                </div>
-                <div class="p-8 flex flex-col gap-5 border-t border-zinc-800">
-                    <div class="flex justify-between items-baseline">
-                        <h3 class="text-xl italic">NonCompliant Sticker (White)</h3>
-                        <span class="text-xl font-bold italic">$2.00</span>
-                    </div>
-                    <div class="grid grid-cols-2 gap-3">
-                        <select id="size4" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3"><option>Standard</option></select>
-                        <select id="color4" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3"><option>White</option></select>
-                    </div>
-                    <button onclick="addToCart('NonCompliant Sticker (White)', 10, 'size4', 'color4', this)" class="w-full bg-white text-black py-4 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-zinc-200 transition-all">
+                    <button onclick="addToCart('Non\'Compteryx Hoodie', 25, 'size-teryx-h', 'color-teryx-h', this)" class="w-full bg-white text-black py-4 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-zinc-200 transition-all">
                         Add to Registry
                     </button>
                 </div>
@@ -321,12 +213,19 @@
     </footer>
 
     <script>
-        let cart = [];
-        
+        let cart = {};
+
         function addToCart(name, price, sizeId, colorId, btn) {
             const size = document.getElementById(sizeId).value;
             const color = document.getElementById(colorId).value;
-            cart.push({ name, price, size, color });
+            const itemKey = `${name}-${size}-${color}`;
+
+            if (cart[itemKey]) {
+                cart[itemKey].quantity += 1;
+            } else {
+                cart[itemKey] = { name, price, size, color, quantity: 1 };
+            }
+
             updateCartUI();
 
             const originalText = btn.innerText;
@@ -341,35 +240,61 @@
             }, 1500);
         }
 
+        function updateQuantity(key, delta) {
+            cart[key].quantity += delta;
+            if (cart[key].quantity <= 0) delete cart[key];
+            updateCartUI();
+        }
+
         function updateCartUI() {
-            document.getElementById('cartCount').innerText = cart.length;
             const itemsContainer = document.getElementById('cartItems');
             const subtotalEl = document.getElementById('subtotal');
+            const cartCount = document.getElementById('cartCount');
+            
             itemsContainer.innerHTML = '';
             let total = 0;
+            let count = 0;
 
-            cart.forEach((item) => {
-                total += item.price;
+            Object.keys(cart).forEach(key => {
+                const item = cart[key];
+                total += item.price * item.quantity;
+                count += item.quantity;
+
                 itemsContainer.innerHTML += `
-                    <div class="flex justify-between items-start border-b border-zinc-900 pb-4">
-                        <div>
+                    <div class="flex justify-between items-center border-b border-zinc-900 pb-4">
+                        <div class="flex-grow">
                             <p class="text-sm italic">${item.name}</p>
                             <p class="text-[10px] uppercase tracking-widest text-zinc-500">${item.size} / ${item.color}</p>
+                            <div class="flex items-center gap-3 mt-2">
+                                <button onclick="updateQuantity('${key}', -1)" class="text-zinc-500 hover:text-white">-</button>
+                                <span class="text-xs font-mono">${item.quantity}</span>
+                                <button onclick="updateQuantity('${key}', 1)" class="text-zinc-500 hover:text-white">+</button>
+                            </div>
                         </div>
-                        <p class="font-bold">$${item.price}.00</p>
+                        <p class="font-bold">$${item.price * item.quantity}.00</p>
                     </div>
                 `;
             });
 
-            if (cart.length === 0) {
-                itemsContainer.innerHTML = '<p class="text-zinc-600 italic">Your cart is empty.</p>';
-            }
+            cartCount.innerText = count;
             subtotalEl.innerText = `$${total}.00`;
+            if (count === 0) itemsContainer.innerHTML = '<p class="text-zinc-600 italic">Your cart is empty.</p>';
         }
 
         function toggleCart() {
             document.getElementById('cartDrawer').classList.toggle('active');
             document.getElementById('cartOverlay').classList.toggle('active');
+        }
+
+        function showCheckout() {
+            if (Object.keys(cart).length === 0) return alert("Your cart is empty.");
+            document.getElementById('checkoutModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCheckout() {
+            document.getElementById('checkoutModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
         }
 
         function openModal(imgSrc) {
