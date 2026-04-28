@@ -55,7 +55,7 @@
         .drawer-overlay.active { display: block; }
         .bjj-checkbox { accent-color: white; width: 1rem; height: 1rem; }
 
-        /* Formspree Success State Styling */
+        /* Formspree States */
         [data-fs-success] { display: none; }
         .fs-succeeded [data-fs-success] { display: block; }
         .fs-succeeded #order-form { display: none; }
@@ -102,22 +102,22 @@
             <form id="order-form" class="space-y-4">
                 <div>
                     <label class="text-[10px] uppercase tracking-widest text-zinc-500 block mb-2">Full Name</label>
-                    <input type="text" name="name" required data-fs-field class="w-full bg-zinc-950 border border-zinc-800 p-3 text-sm focus:border-white outline-none transition-colors">
+                    <input type="text" name="Customer Name" required data-fs-field class="w-full bg-zinc-950 border border-zinc-800 p-3 text-sm focus:border-white outline-none transition-colors">
                 </div>
                 <div>
                     <label class="text-[10px] uppercase tracking-widest text-zinc-500 block mb-2">Phone Number</label>
-                    <input type="tel" name="phone" required data-fs-field class="w-full bg-zinc-950 border border-zinc-800 p-3 text-sm focus:border-white outline-none transition-colors">
+                    <input type="tel" name="Phone" required data-fs-field class="w-full bg-zinc-950 border border-zinc-800 p-3 text-sm focus:border-white outline-none transition-colors">
                 </div>
                 <div>
                     <label class="text-[10px] uppercase tracking-widest text-zinc-500 block mb-2">Email Address</label>
-                    <input type="email" name="email" required data-fs-field class="w-full bg-zinc-950 border border-zinc-800 p-3 text-sm focus:border-white outline-none transition-colors">
+                    <input type="email" name="Email" required data-fs-field class="w-full bg-zinc-950 border border-zinc-800 p-3 text-sm focus:border-white outline-none transition-colors">
                 </div>
                 
-                <input type="hidden" name="order_details" id="order_details_input">
-                <input type="hidden" name="subtotal" id="subtotal_input">
+                <input type="hidden" name="Order Details" id="order_details_input">
+                <input type="hidden" name="Order Total" id="subtotal_input">
 
                 <div class="flex items-center gap-3 pt-4 border-t border-zinc-900">
-                    <input type="checkbox" id="bjjPromise" name="bjj_promise" required class="bjj-checkbox">
+                    <input type="checkbox" id="bjjPromise" name="BJJ Promise Checked" required class="bjj-checkbox">
                     <label for="bjjPromise" class="text-sm italic cursor-pointer">I will train jiu jitsu.</label>
                 </div>
                 <button type="submit" data-fs-submit-btn class="w-full bg-white text-black py-4 mt-6 font-bold uppercase tracking-widest hover:bg-zinc-200 transition-all disabled:opacity-50">
@@ -191,7 +191,90 @@
                 </div>
             </div>
 
+            <div class="flex flex-col border border-zinc-800 bg-zinc-900/10 hover:border-zinc-600 transition-colors">
+                <div class="aspect-video bg-[#f4f4f4] flex items-center justify-center p-8 cursor-zoom-in group overflow-hidden" onclick="openModal('TShirt NYST.png')">
+                    <img src="TShirt NYST.png" class="max-h-full object-contain group-hover:scale-105 transition-transform duration-700">
+                </div>
+                <div class="p-8 flex flex-col gap-5 border-t border-zinc-800">
+                    <div class="flex justify-between items-baseline"><h3 class="text-xl italic">NYSTee 2.0</h3><span class="text-xl font-bold italic">$16.00</span></div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <select id="size4" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3"><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+                        <select id="color4" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3"><option>Grey</option><option>Black</option><option>Navy</option></select>
+                    </div>
+                    <button onclick="addToCart('NYSTee 2.0', 16, 'size4', 'color4', this)" class="w-full bg-white text-black py-4 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-zinc-200 transition-all">Add to Cart</button>
+                </div>
             </div>
+
+            <div class="flex flex-col border border-zinc-800 bg-zinc-900/10 hover:border-zinc-600 transition-colors">
+                <div class="aspect-video bg-[#f4f4f4] flex items-center justify-center p-8 cursor-zoom-in group overflow-hidden" onclick="openModal('noncompteryx hoodie colored.png')">
+                    <img src="noncompteryx hoodie colored.png" class="max-h-full object-contain group-hover:scale-105 transition-transform duration-700">
+                </div>
+                <div class="p-8 flex flex-col gap-5 border-t border-zinc-800">
+                    <div class="flex justify-between items-baseline"><h3 class="text-xl italic">Non'Compteryx Hoodie</h3><span class="text-xl font-bold italic">$27.00</span></div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <select id="size5" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3"><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+                        <select id="color5" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3"><option>Grey</option><option>Black</option><option>Navy</option></select>
+                    </div>
+                    <button onclick="addToCart('Non\'Compteryx Hoodie', 27, 'size5', 'color5', this)" class="w-full bg-white text-black py-4 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-zinc-200 transition-all">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="flex flex-col border border-zinc-800 bg-zinc-900/10 hover:border-zinc-600 transition-colors">
+                <div class="aspect-video bg-[#f4f4f4] flex items-center justify-center p-8 cursor-zoom-in group overflow-hidden" onclick="openModal('noncompteryx tees colored.png')">
+                    <img src="noncompteryx tees colored.png" class="max-h-full object-contain group-hover:scale-105 transition-transform duration-700">
+                </div>
+                <div class="p-8 flex flex-col gap-5 border-t border-zinc-800">
+                    <div class="flex justify-between items-baseline"><h3 class="text-xl italic">Non'Compteryx Tee</h3><span class="text-xl font-bold italic">$17.00</span></div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <select id="size6" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3"><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+                        <select id="color6" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3"><option>Grey</option><option>Black</option><option>Navy</option></select>
+                    </div>
+                    <button onclick="addToCart('Non\'Compteryx Tee', 17, 'size6', 'color6', this)" class="w-full bg-white text-black py-4 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-zinc-200 transition-all">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="flex flex-col border border-zinc-800 bg-zinc-900/10 hover:border-zinc-600 transition-colors">
+                <div class="aspect-video bg-[#f4f4f4] flex items-center justify-center p-8 cursor-zoom-in group overflow-hidden" onclick="openModal('noncompface hoodie colored.png')">
+                    <img src="noncompface hoodie colored.png" class="max-h-full object-contain group-hover:scale-105 transition-transform duration-700">
+                </div>
+                <div class="p-8 flex flex-col gap-5 border-t border-zinc-800">
+                    <div class="flex justify-between items-baseline"><h3 class="text-xl italic">The Face Hoodie</h3><span class="text-xl font-bold italic">$25.00</span></div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <select id="size7" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3"><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+                        <select id="color7" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3"><option>Grey</option><option>Black</option><option>Navy</option></select>
+                    </div>
+                    <button onclick="addToCart('The Face Hoodie', 25, 'size7', 'color7', this)" class="w-full bg-white text-black py-4 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-zinc-200 transition-all">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="flex flex-col border border-zinc-800 bg-zinc-900/10 hover:border-zinc-600 transition-colors">
+                <div class="aspect-video bg-[#f4f4f4] flex items-center justify-center p-8 cursor-zoom-in group overflow-hidden" onclick="openModal('noncompface tee colored.png')">
+                    <img src="noncompface tee colored.png" class="max-h-full object-contain group-hover:scale-105 transition-transform duration-700">
+                </div>
+                <div class="p-8 flex flex-col gap-5 border-t border-zinc-800">
+                    <div class="flex justify-between items-baseline"><h3 class="text-xl italic">The Face Tee</h3><span class="text-xl font-bold italic">$15.00</span></div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <select id="size8" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3"><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+                        <select id="color8" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3"><option>Grey</option><option>Black</option><option>Navy</option></select>
+                    </div>
+                    <button onclick="addToCart('The Face Tee', 15, 'size8', 'color8', this)" class="w-full bg-white text-black py-4 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-zinc-200 transition-all">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="flex flex-col border border-zinc-800 bg-zinc-900/10 hover:border-zinc-600 transition-colors">
+                <div class="aspect-video bg-[#000] flex items-center justify-center p-8 cursor-zoom-in group overflow-hidden" onclick="openModal('NonCompliant white.png')">
+                    <img src="NonCompliant white.png" class="max-h-full object-contain group-hover:scale-105 transition-transform duration-700">
+                </div>
+                <div class="p-8 flex flex-col gap-5 border-t border-zinc-800">
+                    <div class="flex justify-between items-baseline"><h3 class="text-xl italic">Non-Compliant Sticker - 5"</h3><span class="text-xl font-bold italic">$2.00</span></div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <select id="size9" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3"><option>Standard</option></select>
+                        <select id="color9" class="bg-zinc-950 border border-zinc-800 text-[10px] font-bold uppercase tracking-widest p-3"><option>White Letters</option><option>Black Letters</option></select>
+                    </div>
+                    <button onclick="addToCart('Non-Compliant Sticker - 5\'', 2, 'size9', 'color9', this)" class="w-full bg-white text-black py-4 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-zinc-200 transition-all">Add to Cart</button>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer class="py-20 border-t border-zinc-900 text-center opacity-40">
@@ -272,7 +355,6 @@
             document.getElementById('cartView').classList.remove('hidden');
             document.getElementById('checkoutForm').classList.add('hidden');
         }
-
         function toggleCart() {
             document.getElementById('cartDrawer').classList.toggle('active');
             document.getElementById('cartOverlay').classList.toggle('active');
@@ -295,10 +377,8 @@
                 formElement: '#order-form', 
                 formId: 'mgorgard',
                 onSuccess: function() {
-                    // This runs only if the email sends successfully
                     cart = [];
                     updateCartUI();
-                    // Close the drawer after a few seconds
                     setTimeout(() => { 
                         toggleCart(); 
                         setTimeout(hideCheckoutForm, 500); 
@@ -306,9 +386,9 @@
                 }
             });
 
-            // Capture data right before sending
+            // THIS PART ENSURES CART DETAILS ARE SENT
             document.getElementById('order-form').addEventListener('submit', function() {
-                const orderSummary = cart.map(i => `${i.quantity}x ${i.name} (${i.size}/${i.color})`).join(' | ');
+                const orderSummary = cart.map(i => `${i.quantity}x ${i.name} [${i.size}/${i.color}]`).join('\n');
                 document.getElementById('order_details_input').value = orderSummary;
                 document.getElementById('subtotal_input').value = document.getElementById('subtotal').innerText;
             });
