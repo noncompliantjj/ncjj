@@ -371,6 +371,8 @@
 
         // --- FORMSPREE AJAX INTEGRATION ---
         window.addEventListener('load', function() {
+            const form = document.getElementById('order-form');
+            
             window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
             
             formspree('initForm', { 
@@ -386,11 +388,15 @@
                 }
             });
 
-            // THIS PART ENSURES CART DETAILS ARE SENT
-            document.getElementById('order-form').addEventListener('submit', function() {
-                const orderSummary = cart.map(i => `${i.quantity}x ${i.name} [${i.size}/${i.color}]`).join('\n');
+            // IMPORTANT: Listen to the 'click' on the submit button instead of the form 'submit'
+            // This ensures values are written to the hidden inputs BEFORE the AJAX captures the form.
+            const submitBtn = form.querySelector('[data-fs-submit-btn]');
+            
+            submitBtn.addEventListener('mousedown', function() {
+                const orderSummary = cart.map(i => `${i.quantity}x ${i.name} [${i.size}/${i.color}]`).join(' | ');
                 document.getElementById('order_details_input').value = orderSummary;
                 document.getElementById('subtotal_input').value = document.getElementById('subtotal').innerText;
+                console.log("Form data prepared:", orderSummary); // For your testing
             });
         });
     </script>
