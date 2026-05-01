@@ -374,24 +374,29 @@
             window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
             
             formspree('initForm', { 
-                formElement: '#order-form', 
-                formId: 'mgorgard',
-                onSuccess: function() {
-                    cart = [];
-                    updateCartUI();
-                    setTimeout(() => { 
-                        toggleCart(); 
-                        setTimeout(hideCheckoutForm, 500); 
-                    }, 4000);
-                }
-            });
+    formElement: '#order-form', 
+    formId: 'mgorgard',
 
-            // THIS PART ENSURES CART DETAILS ARE SENT
-            document.getElementById('order-form').addEventListener('submit', function() {
-                const orderSummary = cart.map(i => `${i.quantity}x ${i.name} [${i.size}/${i.color}]`).join('\n');
-                document.getElementById('order_details_input').value = orderSummary;
-                document.getElementById('subtotal_input').value = document.getElementById('subtotal').innerText;
-            });
+    onSubmit: function() {
+        const orderSummary = cart
+            .map(i => `${i.quantity}x ${i.name} [${i.size}/${i.color}]`)
+            .join('\n');
+
+        document.getElementById('order_details_input').value = orderSummary;
+        document.getElementById('subtotal_input').value = document.getElementById('subtotal').innerText;
+    },
+
+    onSuccess: function() {
+        cart = [];
+        updateCartUI();
+        setTimeout(() => { 
+            toggleCart(); 
+            setTimeout(hideCheckoutForm, 500); 
+        }, 4000);
+    }
+});
+
+            
         });
     </script>
 </body>
